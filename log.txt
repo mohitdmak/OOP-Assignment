@@ -1,0 +1,10 @@
+player.java:4: error: <identifier> expected
+    private static current_id = 1;
+                             ^
+player.java:16: error: illegal start of expression
+    );
+    ^
+player.java:21: error: illegal start of expression
+    );
+    ^
+3 errors
