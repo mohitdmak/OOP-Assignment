@@ -17,15 +17,21 @@ class Player{
     public final int id;
 
     // rank and high scores
-    public Map<String, Integer> rank = Map.ofEntries(
-            entry("small", 0),
-            entry("medium", 0),
-            entry("big", 0)
+    /* Random generation should be removed later !!!! */
+    Random rand = new Random();
+    int r1 = rand.nextInt(50);
+    int r2 = rand.nextInt(50);
+    int r3 = rand.nextInt(50);
+    /* Random generation should be removed later !!!! */
+    public Map<BoardSize, Integer> rank = Map.ofEntries(
+            entry(BoardSize.SMALL, 0),
+            entry(BoardSize.MEDIUM, 0),
+            entry(BoardSize.BIG, 0)
     );
-    public Map<String, Integer> high_score = Map.ofEntries(
-            entry("small", 0),
-            entry("medium", 0),
-            entry("big", 0)
+    public Map<BoardSize, Integer> high_score = Map.ofEntries(
+            entry(BoardSize.SMALL, r1),
+            entry(BoardSize.MEDIUM, r2),
+            entry(BoardSize.BIG, r3)
     );
 
     ///////////////// CONSTRUCTOR /////////////////
@@ -81,106 +87,4 @@ class Player{
 
 
     ///////////////// TO BE DELETED /////////////////
-    public static void main(String[] args){
-        int valid_action = 0;
-        Player current = null;
-
-        do{
-            if(current != null){
-                System.out.println("\nWelcome (User :" + current.username + ") (ID : " + current.id + ") (Pass : " + current.get_password() + ")");
-            }
-            else{
-                System.out.println("\nNot logged in. ");
-            }
-
-            System.out.println("All Players :");
-            for(Player player : Player.get_players()){
-                System.out.println("Name : " + player.username + "    ID : " + player.id + "    Pass : " + player.get_password());
-            }
-
-            System.out.println("Choose an action . . .\n <0> Register\n <1> Login\n <2> Logout");
-            int not_registered = 0;
-            int not_logged_in = 0;
-            int logout = 0;
-
-            Scanner input = new Scanner(System.in);
-            if(input.hasNextInt()){
-                int action = input.nextInt();
-                if(action == 0 && current == null){
-                    not_registered = 1;
-                    // valid_action = 1;
-                }
-                else if(action == 1 && current == null){
-                    not_logged_in = 1;
-                    // valid_action = 1;
-                }
-                else if(action == 2 && current != null){
-                    logout = 1;
-                }
-                else{
-                    System.out.println("Invalid Action !");
-                }
-            }
-            else{
-                System.out.println("Invalid Action !");
-            }
-
-            if(logout > 0){
-                logout = 0;
-                current = null;
-                System.out.println("Logged out.");
-            }
-
-            while(not_registered > 0){
-                try{
-                    System.out.println("Enter Username : ");
-                    Scanner input_reg = new Scanner(System.in);
-                    String username = input_reg.next();
-
-                    System.out.println("Enter Password : ");
-                    String password = input_reg.next();
-                    System.out.println("Confirm Password : ");
-                    String re_password = input_reg.next();
-
-                    if(password.equals(re_password)){
-                        not_registered = 0;
-                        Player new_player = Player.register(username, password);
-                        System.out.println("You are registered with id :" + new_player.id);
-                    }
-                    else{
-                        System.out.println("Your Passwords Donnot Match !");
-                    }
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-            }
-
-            while(not_logged_in > 0){
-                try{
-                    System.out.println("Enter Username : ");
-                    Scanner input_log = new Scanner(System.in);
-                    String username = input_log.next();
-
-                    System.out.println("Enter Password : ");
-                    String password = input_log.next();
-                    int id = Player.login(username, password);
-
-                    if(id > 0){
-                        Player player = Player.get_current_player_details(id);
-                        current = player;
-                        System.out.println("You are logged in with id :" + player.id);
-                        not_logged_in = 0;
-                    }
-                    else{
-                        System.out.println("Check your username and password again !");
-                    }
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-            }
-
-        }while(valid_action == 0);
-    }
 }
