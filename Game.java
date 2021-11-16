@@ -31,11 +31,9 @@ class Game{
                 int action = input.nextInt();
                 if(action == 0 && current == null){
                     not_registered = 1;
-                    // valid_action = 1;
                 }
                 else if(action == 1 && current == null){
                     not_logged_in = 1;
-                    // valid_action = 1;
                 }
                 else if(action == 2 && current != null){
                     logout = 1;
@@ -67,7 +65,8 @@ class Game{
                     System.out.println("\n---------------------------------------------");
                 }
                 else if(action == 4){
-                    System.exit(0);
+                    valid_action = 1;
+                    // System.exit(0);
                 }
                 else{
                     System.out.println("Invalid Action !");
