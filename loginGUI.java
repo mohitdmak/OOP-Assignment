@@ -63,6 +63,7 @@ public class loginGUI implements ActionListener{
             if(status > 0){
                 Player current_player = Player.get_current_player_details(status);
                 JOptionPane.showMessageDialog(null, "You are logged in with id :" + current_player.id);
+                homeGUI.createUI(current_player);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Check your username and password again !");
