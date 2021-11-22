@@ -9,10 +9,11 @@ public class signupGUI implements ActionListener{
 	private static JButton button;
 	private static JPasswordField Password;
 
+    public static JFrame frame;
     public static void createUI(){
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle("SignUp Page");
         frame.setLocation(new Point(500, 300));
         frame.add(panel);
@@ -61,6 +62,7 @@ public class signupGUI implements ActionListener{
             String message = String.format("You are registered with id : %d", registered_player.id);
             JOptionPane.showMessageDialog(null, message);
             loginGUI.createUI();
+            frame.setVisible(false);
         }
         catch(Exception exp){
             JOptionPane.showMessageDialog(null, "Error in registering new player !");

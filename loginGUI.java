@@ -11,10 +11,11 @@ public class loginGUI implements ActionListener{
 	private static JButton button;
 	private static JPasswordField Password;
 
+    public static JFrame frame;
     public static void createUI(){
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle("LOGIN PAGE");
         frame.setLocation(new Point(500, 300));
         frame.add(panel);
@@ -64,6 +65,7 @@ public class loginGUI implements ActionListener{
                 Player current_player = Player.get_current_player_details(status);
                 JOptionPane.showMessageDialog(null, "You are logged in with id :" + current_player.id);
                 homeGUI.createUI(current_player);
+                frame.setVisible(false);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Check your username and password again !");
