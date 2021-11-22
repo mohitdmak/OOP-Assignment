@@ -5,7 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class loginGUI implements ActionListener{
-    public static void main(String[] args){
+
+    private static JLabel password1, label;
+	private static JTextField username;
+	private static JButton button;
+	private static JPasswordField Password;
+
+    public static void createUI(){
         JPanel panel = new JPanel();
         panel.setLayout(null);
         JFrame frame = new JFrame();
@@ -47,16 +53,25 @@ public class loginGUI implements ActionListener{
         String Password1 = String.valueOf(Password.getPassword());
 
         // below this function needs to change
-        if (Username.equals("section.io") && Password1.equals("123"))
-            JOptionPane.showMessageDialog(null, "Login Successful");
-        else
-            JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+        // if (Username.equals("section.io") && Password1.equals("123"))
+        //     JOptionPane.showMessageDialog(null, "Login Successful");
+        // else
+        //     JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+        // changed function
+        try{
+            int status = Player.login(Username, Password1);
+            if(status > 0){
+                Player current_player = Player.get_current_player_details(status);
+                JOptionPane.showMessageDialog(null, "You are logged in with id :" + current_player.id);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Check your username and password again !");
+            }
+        }
+        catch(Exception exp){
+            JOptionPane.showMessageDialog(null, "Error in logging in player !");
+        }
     }
-
-    private static JLabel password1, label;
-	private static JTextField username;
-	private static JButton button;
-	private static JPasswordField Password;
 
 
 }

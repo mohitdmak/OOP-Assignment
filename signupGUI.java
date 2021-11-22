@@ -3,7 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class signupGUI implements ActionListener{
-    public static void main(String[] args){
+
+    private static JLabel password1, label;
+	private static JTextField username;
+	private static JButton button;
+	private static JPasswordField Password;
+
+    public static void createUI(){
         JPanel panel = new JPanel();
         panel.setLayout(null);
         JFrame frame = new JFrame();
@@ -54,14 +60,14 @@ public class signupGUI implements ActionListener{
             Player registered_player = Player.register(Username, Password1);
             String message = String.format("You are registered with id : %d", registered_player.id);
             JOptionPane.showMessageDialog(null, message);
+            loginGUI.createUI();
         }
         catch(Exception exp){
             JOptionPane.showMessageDialog(null, "Error in registering new player !");
         }
     }
 
-    private static JLabel password1, label;
-	private static JTextField username;
-	private static JButton button;
-	private static JPasswordField Password;
+    public static void main(String[] args){
+        signupGUI.createUI();
+    }
 }

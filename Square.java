@@ -1,30 +1,25 @@
 public class Square{
     private final int row, col;
-    private SquareType sqType;
+    private SquareType square_type;
  
-    public Square(int row, int col)
-    {
+    public Square(int row, int col){
         this.row = row;
         this.col = col;
     }
  
-    public SquareType getSquareType()
-    {
-        return sqType;
+    public SquareType getSquareType(){
+        return square_type;
     }
  
-    public void setSquareType(SquareType sqType)
-    {
-        this.sqType = sqType;
+    public void setSquareType(SquareType square_type){
+        this.square_type = square_type;
     }
  
-    public int getRow()
-    {
+    public int getRow(){
         return row;
     }
  
-    public int getCol()
-    {
+    public int getCol(){
         return col;
     }
 }
