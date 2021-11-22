@@ -45,10 +45,19 @@ public class signupGUI implements ActionListener{
         String Password1 = String.valueOf(Password.getPassword());
 
         // below this function needs to change
-        if (Username.equals("section.io") && Password1.equals("123"))
-            JOptionPane.showMessageDialog(null, "Login Successful");
-        else
-            JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+        // if (Username.equals("section.io") && Password1.equals("123"))
+        //     JOptionPane.showMessageDialog(null, "Login Successful");
+        // else
+        //     JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+        // changed function :
+        try{
+            Player registered_player = Player.register(Username, Password1);
+            String message = String.format("You are registered with id : %d", registered_player.id);
+            JOptionPane.showMessageDialog(null, message);
+        }
+        catch(Exception exp){
+            JOptionPane.showMessageDialog(null, "Error in registering new player !");
+        }
     }
 
     private static JLabel password1, label;
