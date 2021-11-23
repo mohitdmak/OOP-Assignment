@@ -16,10 +16,10 @@ class Leaderboard{
                 @Override
                 public int compare(Player p1, Player p2){
                     if(p1.high_score.get(BoardSize.SMALL) > p2.high_score.get(BoardSize.SMALL)){
-                        return 1;
+                        return -1;
                     }
                     else if(p1.high_score.get(BoardSize.SMALL) < p2.high_score.get(BoardSize.SMALL)){
-                        return -1;
+                        return 1;
                     }
                     else if(p1.hashCode() != p2.hashCode()){
                         return 1;
@@ -33,10 +33,10 @@ class Leaderboard{
                 @Override
                 public int compare(Player p1, Player p2){
                     if(p1.high_score.get(BoardSize.MEDIUM) > p2.high_score.get(BoardSize.MEDIUM)){
-                        return 1;
+                        return -1;
                     }
                     else if(p1.high_score.get(BoardSize.MEDIUM) < p2.high_score.get(BoardSize.MEDIUM)){
-                        return -1;
+                        return 1;
                     }
                     else if(p1.hashCode() != p2.hashCode()){
                         return 1;
@@ -50,10 +50,10 @@ class Leaderboard{
                 @Override
                 public int compare(Player p1, Player p2){
                     if(p1.high_score.get(BoardSize.BIG) > p2.high_score.get(BoardSize.BIG)){
-                        return 1;
+                        return -1;
                     }
                     else if(p1.high_score.get(BoardSize.BIG) < p2.high_score.get(BoardSize.BIG)){
-                        return -1;
+                        return 1;
                     }
                     else if(p1.hashCode() != p2.hashCode()){
                         return 1;

@@ -34,8 +34,8 @@ public class homeGUI extends javax.swing.JFrame {
     private javax.swing.JButton startBtn;
 
     // End of variables declaration                   
-    public homeGUI(String username, int id) {
-        initComponents(username, id);
+    public homeGUI(Player current_player){
+        initComponents(current_player);
     }
 
     /**
@@ -45,7 +45,7 @@ public class homeGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents(String username, int id) {
+    private void initComponents(Player current_player) {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -114,7 +114,7 @@ public class homeGUI extends javax.swing.JFrame {
         leadBtn.setText("Leaderboard");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt);
+                leadBtnActionPerformed(evt, current_player);
             }
         });
 
@@ -129,9 +129,9 @@ public class homeGUI extends javax.swing.JFrame {
 
         jLabel5.setText("ID:");
         
-        jLabel6.setText(username);
+        jLabel6.setText(current_player.username);
 
-        jLabel7.setText(String.valueOf(id));
+        jLabel7.setText(String.valueOf(current_player.id));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,8 +238,9 @@ public class homeGUI extends javax.swing.JFrame {
         this.setVisible(false);
     }                                         
 
-    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
         // TODO add your handling code here:
+        leadGUI.createUI(current_player);
     }                                       
 
     /**
@@ -273,7 +274,7 @@ public class homeGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new homeGUI(current_player.username, current_player.id).setVisible(true);
+                new homeGUI(current_player).setVisible(true);
             }
         });
     }

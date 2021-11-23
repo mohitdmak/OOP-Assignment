@@ -36,7 +36,7 @@ public class signupGUI implements ActionListener{
         Password.setBounds(100, 75, 193, 28);
         panel.add(Password);
 
-        button = new JButton("Login");
+        button = new JButton("SignUp");
         button.setBounds(100, 110, 90, 25);
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLACK);

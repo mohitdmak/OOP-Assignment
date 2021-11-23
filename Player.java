@@ -23,16 +23,14 @@ class Player{
     int r2 = rand.nextInt(50);
     int r3 = rand.nextInt(50);
     /* Random generation should be removed later !!!! */
-    public Map<BoardSize, Integer> rank = Map.ofEntries(
-            entry(BoardSize.SMALL, 0),
-            entry(BoardSize.MEDIUM, 0),
-            entry(BoardSize.BIG, 0)
-    );
-    public Map<BoardSize, Integer> high_score = Map.ofEntries(
-            entry(BoardSize.SMALL, r1),
-            entry(BoardSize.MEDIUM, r2),
-            entry(BoardSize.BIG, r3)
-    );
+
+    // map storing highscores and ranks for different board sizes
+    public Map<BoardSize, Integer> rank = new HashMap<BoardSize, Integer>();
+    public Map<BoardSize, Integer> high_score = new HashMap<BoardSize, Integer>(){{
+        put(BoardSize.SMALL, r1);
+        put(BoardSize.MEDIUM, r2);
+        put(BoardSize.BIG, r3);
+    }};
 
     ///////////////// CONSTRUCTOR /////////////////
     
@@ -70,10 +68,24 @@ class Player{
         return -1;
     }
 
+    // setup player ranks
+    public void set_player_ranks(){
+        // obtaining ranklists
+        List<Player> ranks_small = new ArrayList<>(Leaderboard.get_leaderboard().get(BoardSize.SMALL));
+        List<Player> ranks_medium = new ArrayList<>(Leaderboard.get_leaderboard().get(BoardSize.MEDIUM));
+        List<Player> ranks_big = new ArrayList<>(Leaderboard.get_leaderboard().get(BoardSize.BIG));
+
+        // obtaining ranks
+        this.rank.put(BoardSize.SMALL, ranks_small.indexOf(this) + 1);
+        this.rank.put(BoardSize.MEDIUM, ranks_medium.indexOf(this) + 1);
+        this.rank.put(BoardSize.BIG, ranks_big.indexOf(this) + 1);
+    }
+
     // current session's player details
     public static Player get_current_player_details(int id){
         for(Player player : all_players){
             if(player.id == id){
+                player.set_player_ranks();
                 return player;
             }
         }

@@ -72,6 +72,7 @@ public class loginGUI implements ActionListener{
             }
         }
         catch(Exception exp){
+            exp.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in logging in player !");
         }
     }
