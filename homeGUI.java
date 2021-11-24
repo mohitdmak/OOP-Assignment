@@ -78,6 +78,7 @@ public class homeGUI extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Easy");
+        jRadioButton1.setActionCommand("EASY");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -86,6 +87,7 @@ public class homeGUI extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Medium");
+        jRadioButton2.setActionCommand("MEDIUM");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
@@ -94,20 +96,24 @@ public class homeGUI extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Hard");
+        jRadioButton3.setActionCommand("HARD");
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("Small");
+        jRadioButton4.setActionCommand("SMALL");
 
         buttonGroup2.add(jRadioButton5);
         jRadioButton5.setText("Medium");
+        jRadioButton5.setActionCommand("MEDIUM");
 
         buttonGroup2.add(jRadioButton6);
         jRadioButton6.setText("Large");
+        jRadioButton6.setActionCommand("BIG");
 
         startBtn.setText("Start");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startBtnActionPerformed(evt);
+                startBtnActionPerformed(evt, current_player);
             }
         });
 
@@ -228,8 +234,19 @@ public class homeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                             
 
-    private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void startBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player){ 
+        // handling code
+        try{
+            String difficulty_selection = buttonGroup1.getSelection().getActionCommand();
+            String board_selection = buttonGroup2.getSelection().getActionCommand();
+            if(difficulty_selection != null && board_selection != null){
+                boardGUI.createUI(current_player, difficulty_selection);
+                this.setVisible(false);
+            }
+        }
+        catch(NullPointerException exp){
+            System.out.println("Select difficulty level and Board Size first !");
+        }
     }                                        
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          

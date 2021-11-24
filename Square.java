@@ -1,6 +1,6 @@
 public class Square{
     private final int row, col;
-    private SquareType square_type;
+    private SquareType square_type = SquareType.EMPTY;
  
     public Square(int row, int col){
         this.row = row;

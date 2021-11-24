@@ -5,129 +5,180 @@ import java.util.*;
 // To represent Snake Game
 public class Game {
     /////////////////////////////////////////////////////////////////////// GUI Implementation
-    public static void main(String[] args){
-        signupGUI.createUI();
-    }
+    // public static void main(String[] args){
+    //     signupGUI.createUI();
+    // }
+// }
 
 
     /////////////////////////////////////////////////////////////////////// GFG IMPLEMENTATION
-	// public static final int DIRECTION_NONE = 0, DIRECTION_RIGHT = 1,
-	// DIRECTION_LEFT = -1, DIRECTION_UP = 2, DIRECTION_DOWN = -2;
-	// private Snake snake;
-	// private Board board;
-	// private int direction;
-	// private boolean gameOver;
+	public static final int DIRECTION_NONE = 0, DIRECTION_RIGHT = 1, DIRECTION_LEFT = -1, DIRECTION_UP = 2, DIRECTION_DOWN = -2;
+	private static Snake snake;
+	private static Board board;
+	private static int direction;
+	private static boolean gameOver;
 
-	// public Game(Snake snake, Board board){
-	// 	this.snake = snake;
-	// 	this.board = board;
-	// }
+	public Game(Snake snake, Board board){
+		this.snake = snake;
+		this.board = board;
+	}
 
-	// public Snake getSnake(){
-	// 	return snake;
-	// }
+	public static Snake getSnake(){
+		return snake;
+	}
 
-	// public void setSnake(Snake snake){
-	// 	this.snake = snake;
-	// }
+	public static void setSnake(Snake snake){
+		snake = snake;
+	}
 
-	// public Board getBoard(){
-	// 	return board;
-	// }
+	public static Board getBoard(){
+		return board;
+	}
 
-	// public void setBoard(Board board){
-	// 	this.board = board;
-	// }
+	public static void setBoard(Board board){
+		board = board;
+	}
 
-	// public boolean isGameOver(){
-	// 	return gameOver;
-	// }
+	public static boolean isGameOver(){
+		return gameOver;
+	}
 
-	// public void setGameOver(boolean gameOver){
-	// 	this.gameOver = gameOver;
-	// }
+	public static void setGameOver(boolean gameOver){
+		gameOver = gameOver;
+	}
 
-	// public int getDirection(){
-	// 	return direction;
-	// }
+	public static int getDirection(){
+		return direction;
+	}
 
-	// public void setDirection(int direction){
-	// 	this.direction = direction;
-	// }
+	public static void setDirection(int dir){
+		direction = dir;
+	}
 
-	// // We need to update the game at regular intervals,
-	// // and accept user input from the Keyboard.
-	// public void update(){
-	// 	System.out.println("Going to update the game");
-	// 	if (!gameOver) {
-	// 		if (direction != DIRECTION_NONE) {
-	// 			Square nextSquare = getNextSquare(snake.getHead());
+	// We need to update the game at regular intervals,
+	// and accept user input from the Keyboard.
+	public void update(){
+		System.out.println("Going to update the game");
+		if (!gameOver) {
+			if (direction != DIRECTION_NONE) {
+				Square nextSquare = getNextSquare(snake.getHead());
 
-	// 			if (snake.checkCrash(nextSquare)) {
-	// 				setDirection(DIRECTION_NONE);
-	// 				gameOver = true;
-	// 			}
-	// 			else {
-	// 				snake.move(nextSquare);
-	// 				if (nextSquare.getSquareType() == SquareType.FOOD) {
-	// 					snake.grow();
-	// 					board.generateFood();
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
+				if(nextSquare == null || snake.checkCrash(nextSquare)){
+					setDirection(DIRECTION_NONE);
+					gameOver = true;
+				}
+				else{
+                    System.out.println(nextSquare.getSquareType());
+					if(nextSquare.getSquareType() == SquareType.FOOD){
+                        System.out.println("food!");
+						snake.grow(nextSquare);
+						board.generateFood();
+					}
+                    else{
+                        snake.move(nextSquare);
+                        System.out.println("moved" + String.valueOf(snake.getSnakePartList().size()));
+                    }
+				}
+			}
+            else{
+                System.out.println("YEA");
+            }
+		}
+	}
 
-	// private Square getNextSquare(Square currentPosition){
-	// 	System.out.println("Going to find next cell");
-	// 	int row = currentPosition.getRow();
-	// 	int col = currentPosition.getCol();
+	private Square getNextSquare(Square currentPosition){
+		System.out.println("Going to find next cell");
+		int row = currentPosition.getRow();
+		int col = currentPosition.getCol();
 
-	// 	if (direction == DIRECTION_RIGHT){
-	// 		col++;
-	// 	}
-	// 	else if (direction == DIRECTION_LEFT){
-	// 		col--;
-	// 	}
-	// 	else if (direction == DIRECTION_UP){
-	// 		row--;
-	// 	}
-	// 	else if (direction == DIRECTION_DOWN){
-	// 		row++;
-	// 	}
+		if (direction == DIRECTION_RIGHT){
+			col++;
+		}
+		else if (direction == DIRECTION_LEFT){
+			col--;
+		}
+		else if (direction == DIRECTION_UP){
+			row--;
+		}
+		else if (direction == DIRECTION_DOWN){
+			row++;
+		}
 
-	// 	Square nextSquare = board.getSquares()[row][col];
+        Square nextSquare;
+        if(row >= board.ROW_COUNT || col >= board.COL_COUNT || row < 0 || col < 0){
+            nextSquare = null;
+            this.gameOver = true;
+        }
+        else{
+            nextSquare = board.getSquares()[row][col];
+        }
 
-	// 	return nextSquare;
-	// }
+		return nextSquare;
+	}
 
 	// public static void main(String[] args){
+    public static Game start(){
 
-	// 	System.out.println("Going to start game");
+		System.out.println("Going to start game");
 
-	// 	Square initPos = new Square(0, 0);
-	// 	Snake initSnake = new Snake(initPos);
-	// 	Board board = new Board(10, 10);
-	// 	Game newGame = new Game(initSnake, board);
-	// 	newGame.gameOver = false;
-	// 	newGame.direction = DIRECTION_RIGHT;
+		Board board = new Board(BoardSize.BIG);
+		Square initPos = board.getSquares()[0][0];
+		Snake initSnake = new Snake(initPos);
+		Game newGame = new Game(initSnake, board);
+		newGame.gameOver = false;
+		newGame.setDirection(1);
+        board.generateFood();
+        // newGame.update();
 
-	// 	// We need to update the game at regular intervals,
-	// 	// and accept user input from the Keyboard.
+        return newGame;
 
-	// 	// here I have just called the different methods
-	// 	// to show the functionality
-	// 	for (int i = 0; i < 5; i++){
-	// 		if (i == 2)
-	// 			newGame.board.generateFood();
-	// 		newGame.update();
-	// 		if (i == 3)
-	// 			newGame.direction = DIRECTION_RIGHT;
-	// 		if (newGame.gameOver == true)
-	// 			break;
-	// 	}
-	// }
-// }
+		// We need to update the game at regular intervals,
+		// and accept user input from the Keyboard.
+
+		// here I have just called the different methods
+		// to show the functionality
+		// for (int i = 0; i < 5 && input.hasNext(); i++){
+        // while(true){
+		// if (input.next() == "h")
+				// newGame.direction = DIRECTION_LEFT;
+        //         newGame.update();
+			// // if (input.next() == "l")
+				// // newGame.direction = DIRECTION_RIGHT;
+        //         // newGame.update();
+			// if (input.next() == "j")
+				// newGame.direction = DIRECTION_DOWN;
+        //         newGame.update();
+			// if (input.next() == "k")
+				// newGame.direction = DIRECTION_UP;
+        //         newGame.update();
+			// if (newGame.gameOver == true)
+				// break;
+		// }
+	}
+
+    public static void main(String[] args){
+        Game game = Game.start();
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(!game.gameOver){
+                    game.update();
+                    for(Square[] row : game.getBoard().getSquares()){
+                        for(Square square : row){
+                            System.out.print(String.valueOf(square.getSquareType()).substring(0, 1) + " ");
+                        }
+                        System.out.println("");
+                    }
+                }
+                else{
+                    System.out.println("ENDED");
+                }
+                // updateGUI();
+                // Enter your code which you want to execute every 2 second
+            }
+        }, 0, 1000);//put here time 1000 milliseconds = 1 second
+    }
+}
 
 
     /////////////////////////////////////////////////////////////////// my custom cli implementation
@@ -264,4 +315,4 @@ public class Game {
 
 //         }while(valid_action == 0);
 //     }
-}
+// }

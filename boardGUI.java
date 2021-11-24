@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+// necessary imports to maintain square 2d array
+import java.util.*;
+
 /**
  *
  * @author Samriddha
@@ -12,8 +15,16 @@ public class boardGUI extends javax.swing.JFrame {
     /**
      * Creates new form boardGUI
      */
-    public boardGUI() {
-        initComponents();
+    static Game game = null;
+    static String difficulty_selection = null;
+    public Map<String, Integer> difficulty = new HashMap<String, Integer>(){{
+        put("EASY", 10);
+        put("MEDIUM", 6);
+        put("HARD", 2);
+    }};
+    public boardGUI(Player current_player, String difficulty) {
+        initComponents(current_player, difficulty_selection);
+        difficulty_selection = difficulty;
     }
 
     /**
@@ -23,7 +34,7 @@ public class boardGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(Player current_player, String difficulty_selection) {
 
         jl00 = new javax.swing.JLabel();
         jl01 = new javax.swing.JLabel();
@@ -173,6 +184,10 @@ public class boardGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         homeBtn = new javax.swing.JButton();
         leadBtn = new javax.swing.JButton();
+        upBtn = new javax.swing.JButton();
+        downBtn = new javax.swing.JButton();
+        rightBtn = new javax.swing.JButton();
+        leftBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -320,7 +335,8 @@ public class boardGUI extends javax.swing.JFrame {
         jl41.setOpaque(true);
         jl41.setPreferredSize(new java.awt.Dimension(20, 20));
 
-        jl42.setBackground(new java.awt.Color(255, 51, 51));
+        // seeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+        jl42.setBackground(new java.awt.Color(255, 255, 255));
         jl42.setMaximumSize(new java.awt.Dimension(20, 20));
         jl42.setMinimumSize(new java.awt.Dimension(20, 20));
         jl42.setOpaque(true);
@@ -1053,14 +1069,42 @@ public class boardGUI extends javax.swing.JFrame {
         homeBtn.setText("Home");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBtnActionPerformed(evt);
+                homeBtnActionPerformed(evt, current_player);
             }
         });
 
         leadBtn.setText("LeaderboardGUI");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt);
+                leadBtnActionPerformed(evt, current_player);
+            }
+        });
+
+        upBtn.setText("Up");
+        upBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upBtnActionPerformed(evt);
+            }
+        });
+
+        downBtn.setText("Down");
+        downBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downBtnActionPerformed(evt);
+            }
+        });
+
+        rightBtn.setText("Right");
+        rightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rightBtnActionPerformed(evt);
+            }
+        });
+
+        leftBtn.setText("Left");
+        leftBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leftBtnActionPerformed(evt);
             }
         });
 
@@ -1071,7 +1115,10 @@ public class boardGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
+                        .addGap(189, 189, 189)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1321,6 +1368,7 @@ public class boardGUI extends javax.swing.JFrame {
                                         .addComponent(jl87, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(leftBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jlB0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1328,24 +1376,17 @@ public class boardGUI extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jlB2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jlB3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jlB3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jlB4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jlB5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jlB6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jlB7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(16, 16, 16)
-                                                .addComponent(startBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jlB4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlB5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlB6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlB7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(leadBtn)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jlA8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1377,18 +1418,29 @@ public class boardGUI extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jlBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jlBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jlBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(downBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(upBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel1)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                        .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(startBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leadBtn))
+                .addGap(89, 89, 89))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1584,37 +1636,266 @@ public class boardGUI extends javax.swing.JFrame {
                             .addComponent(jlBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlB9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(39, 39, 39)
+                .addComponent(upBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rightBtn)
+                    .addComponent(leftBtn))
+                .addGap(9, 9, 9)
+                .addComponent(downBtn)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(homeBtn)
-                            .addComponent(leadBtn)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(startBtn)))
-                .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(homeBtn)
+                        .addComponent(leadBtn))
+                    .addComponent(startBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(357, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>                        
 
+    // updating gui via API
+    public void updateGUI(Square[][] all_squares){
+        System.out.println("updating gui");
+        Map<Square, javax.swing.JLabel> gui_squares_api = new HashMap<Square, javax.swing.JLabel>(){{
+            put(all_squares[0][0], jl00);
+            put(all_squares[0][1], jl01);
+            put(all_squares[0][2], jl02);
+            put(all_squares[0][3], jl03);
+            put(all_squares[0][4], jl04);
+            put(all_squares[0][5], jl05);
+            put(all_squares[0][6], jl06);
+            put(all_squares[0][7], jl07);
+            put(all_squares[0][8], jl08);
+            put(all_squares[0][9], jl09);
+            put(all_squares[0][10], jl0A);
+            put(all_squares[0][11], jl0B);
+            put(all_squares[1][0], jl10);
+            put(all_squares[1][1], jl11);
+            put(all_squares[1][2], jl12);
+            put(all_squares[1][3], jl13);
+            put(all_squares[1][4], jl14);
+            put(all_squares[1][5], jl15);
+            put(all_squares[1][6], jl16);
+            put(all_squares[1][7], jl17);
+            put(all_squares[1][8], jl18);
+            put(all_squares[1][9], jl19);
+            put(all_squares[1][10], jl1A);
+            put(all_squares[1][11], jl1B);
+            put(all_squares[2][0], jl20);
+            put(all_squares[2][1], jl21);
+            put(all_squares[2][2], jl22);
+            put(all_squares[2][3], jl23);
+            put(all_squares[2][4], jl24);
+            put(all_squares[2][5], jl25);
+            put(all_squares[2][6], jl26);
+            put(all_squares[2][7], jl27);
+            put(all_squares[2][8], jl28);
+            put(all_squares[2][9], jl29);
+            put(all_squares[2][10], jl2A);
+            put(all_squares[2][11], jl2B);
+            put(all_squares[3][0], jl30);
+            put(all_squares[3][1], jl31);
+            put(all_squares[3][2], jl32);
+            put(all_squares[3][3], jl33);
+            put(all_squares[3][4], jl34);
+            put(all_squares[3][5], jl35);
+            put(all_squares[3][6], jl36);
+            put(all_squares[3][7], jl37);
+            put(all_squares[3][8], jl38);
+            put(all_squares[3][9], jl39);
+            put(all_squares[3][10], jl3A);
+            put(all_squares[3][11], jl3B);
+            put(all_squares[4][0], jl40);
+            put(all_squares[4][1], jl41);
+            put(all_squares[4][2], jl42);
+            put(all_squares[4][3], jl43);
+            put(all_squares[4][4], jl44);
+            put(all_squares[4][5], jl45);
+            put(all_squares[4][6], jl46);
+            put(all_squares[4][7], jl47);
+            put(all_squares[4][8], jl48);
+            put(all_squares[4][9], jl49);
+            put(all_squares[4][10], jl4A);
+            put(all_squares[4][11], jl4B);
+            put(all_squares[5][0], jl50);
+            put(all_squares[5][1], jl51);
+            put(all_squares[5][2], jl52);
+            put(all_squares[5][3], jl53);
+            put(all_squares[5][4], jl54);
+            put(all_squares[5][5], jl55);
+            put(all_squares[5][6], jl56);
+            put(all_squares[5][7], jl57);
+            put(all_squares[5][8], jl58);
+            put(all_squares[5][9], jl59);
+            put(all_squares[5][10], jl5A);
+            put(all_squares[5][11], jl5B);
+            put(all_squares[6][0], jl60);
+            put(all_squares[6][1], jl61);
+            put(all_squares[6][2], jl62);
+            put(all_squares[6][3], jl63);
+            put(all_squares[6][4], jl64);
+            put(all_squares[6][5], jl65);
+            put(all_squares[6][6], jl66);
+            put(all_squares[6][7], jl67);
+            put(all_squares[6][8], jl68);
+            put(all_squares[6][9], jl69);
+            put(all_squares[6][10], jl6A);
+            put(all_squares[6][11], jl6B);
+            put(all_squares[7][0], jl70);
+            put(all_squares[7][1], jl71);
+            put(all_squares[7][2], jl72);
+            put(all_squares[7][3], jl73);
+            put(all_squares[7][4], jl74);
+            put(all_squares[7][5], jl75);
+            put(all_squares[7][6], jl76);
+            put(all_squares[7][7], jl77);
+            put(all_squares[7][8], jl78);
+            put(all_squares[7][9], jl79);
+            put(all_squares[7][10], jl7A);
+            put(all_squares[7][11], jl7B);
+            put(all_squares[8][0], jl80);
+            put(all_squares[8][1], jl81);
+            put(all_squares[8][2], jl82);
+            put(all_squares[8][3], jl83);
+            put(all_squares[8][4], jl84);
+            put(all_squares[8][5], jl85);
+            put(all_squares[8][6], jl86);
+            put(all_squares[8][7], jl87);
+            put(all_squares[8][8], jl88);
+            put(all_squares[8][9], jl89);
+            put(all_squares[8][10], jl8A);
+            put(all_squares[8][11], jl8B);
+            put(all_squares[9][0], jl90);
+            put(all_squares[9][1], jl91);
+            put(all_squares[9][2], jl92);
+            put(all_squares[9][3], jl93);
+            put(all_squares[9][4], jl94);
+            put(all_squares[9][5], jl95);
+            put(all_squares[9][6], jl96);
+            put(all_squares[9][7], jl97);
+            put(all_squares[9][8], jl98);
+            put(all_squares[9][9], jl99);
+            put(all_squares[9][10], jl9A);
+            put(all_squares[9][11], jl9B);
+            put(all_squares[10][0], jlA0);
+            put(all_squares[10][1], jlA1);
+            put(all_squares[10][2], jlA2);
+            put(all_squares[10][3], jlA3);
+            put(all_squares[10][4], jlA4);
+            put(all_squares[10][5], jlA5);
+            put(all_squares[10][6], jlA6);
+            put(all_squares[10][7], jlA7);
+            put(all_squares[10][8], jlA8);
+            put(all_squares[10][9], jlA9);
+            put(all_squares[10][10], jlAA);
+            put(all_squares[10][11], jlAB);
+            put(all_squares[11][0], jlB0);
+            put(all_squares[11][1], jlB1);
+            put(all_squares[11][2], jlB2);
+            put(all_squares[11][3], jlB3);
+            put(all_squares[11][4], jlB4);
+            put(all_squares[11][5], jlB5);
+            put(all_squares[11][6], jlB6);
+            put(all_squares[11][7], jlB7);
+            put(all_squares[11][8], jlB8);
+            put(all_squares[11][9], jlB9);
+            put(all_squares[11][10], jlBA);
+            put(all_squares[11][11], jlBB);
+        }};
+
+        for(Square[] square_row : all_squares){
+            for(Square square : square_row){
+                if(square.getSquareType() == SquareType.EMPTY){
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(255, 255, 255));
+                }
+                if(square.getSquareType() == SquareType.FOOD){
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(100, 1, 1));
+                }
+                else if(square.getSquareType() == SquareType.SNAKE_NODE){
+                    System.out.println("node");
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(255, 51, 51));
+                }
+                else if(square.getSquareType() == SquareType.SNAKE_HEAD){
+                    System.out.println("head");
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(200, 1, 1));
+                }
+            }
+        }
+    }
+
+    // handle start button
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // inner class for timer
+        class TimedGame{
+            Timer timer;
+            class updateGame extends TimerTask{
+                @Override
+                public void run(){
+                    if(!game.isGameOver()){
+                        game.update();
+                        updateGUI(game.getBoard().getSquares());
+                    }
+                    else{
+                        System.out.println("ENDED");
+                        timer.cancel(); //Terminate the timer thread
+                        System.out.println("Time's up!");
+                    }
+                }
+            }
+            public TimedGame(int seconds){
+                timer = new Timer();
+                timer.schedule(new updateGame(), 0, seconds * 100);
+            }
+        }
+        // timer manager
+        if(difficulty_selection != null){
+            game = Game.start();
+            new TimedGame(difficulty.get(difficulty_selection));
+            System.out.format("Task scheduled.%n");
+        }
+        else{
+            System.out.println("Select a Difficulty !");
+        }
     }                                        
 
-    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
         // TODO add your handling code here:
+        homeGUI.createUI(current_player);
+        this.setVisible(false);
     }                                       
 
-    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void leftBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_LEFT);
+    }                                       
+
+    private void upBtnActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_UP);
+    }                                     
+
+    private void rightBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_RIGHT);
+    }                                        
+
+    private void downBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_DOWN);
+    }                                       
+
+    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
+        // TODO add your handling code here:
+        leadGUI.createUI(current_player);
     }                                       
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void createUI(Player current_player, String difficulty_selection){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1641,12 +1922,18 @@ public class boardGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new boardGUI().setVisible(true);
+                new boardGUI(current_player, difficulty_selection).setVisible(true);
             }
         });
     }
 
+    // public static void main(String[] args){
+        // trial run
+        // boardGUI.createUI(null);
+    // }
+
     // Variables declaration - do not modify                     
+    private javax.swing.JButton downBtn;
     private javax.swing.JButton homeBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jl00;
@@ -1794,6 +2081,9 @@ public class boardGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlBA;
     private javax.swing.JLabel jlBB;
     private javax.swing.JButton leadBtn;
+    private javax.swing.JButton leftBtn;
+    private javax.swing.JButton rightBtn;
     private javax.swing.JButton startBtn;
+    private javax.swing.JButton upBtn;
     // End of variables declaration                   
 }

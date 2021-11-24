@@ -3,9 +3,23 @@ public class Board {
     final int ROW_COUNT, COL_COUNT;
     private Square[][] squares;
  
-    public Board(int rowCount, int columnCount){
-        ROW_COUNT = rowCount;
-        COL_COUNT = columnCount;
+    public Board(BoardSize board_size){
+        if(board_size == BoardSize.SMALL){
+            ROW_COUNT = 6;
+            COL_COUNT = 6;
+        }
+        else if(board_size == BoardSize.MEDIUM){
+            ROW_COUNT = 9;
+            COL_COUNT = 9;
+        }
+        else if(board_size == BoardSize.BIG){
+            ROW_COUNT = 12;
+            COL_COUNT = 12;
+        }
+        else{
+            ROW_COUNT = 12;
+            COL_COUNT = 12;
+        }
  
         squares = new Square[ROW_COUNT][COL_COUNT];
         for (int row = 0; row < ROW_COUNT; row++){

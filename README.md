@@ -1,7 +1,7 @@
 # OOP-Assignment
 
 ### TODO:
-* enum for player?
+* DONT remove temp_*.java files
 * remove random generation later
 
 ## DOUBTS:
