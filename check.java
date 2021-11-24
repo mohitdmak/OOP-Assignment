@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author Samriddha
  */
-public class leadGUI extends javax.swing.JFrame {
+public class leadGUI_xyz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton backBtn;
