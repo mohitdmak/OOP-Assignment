@@ -1919,7 +1919,12 @@ public class boardGUI extends javax.swing.JFrame {
 
     private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
         // TODO add your handling code here:
-        leadGUI.createUI(current_player);
+        if(!game.isGameOver()){
+            infoLabel.setText("Game hasn't ended");
+        }
+        else{
+            leadGUI.createUI(current_player);
+        }
     }                                       
 
     /**
