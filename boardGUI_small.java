@@ -2,20 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+// necessary imports to maintain square 2d array
+import java.util.*;
 /**
  *
  * @author Samriddha
  */
-public class board extends javax.swing.JFrame {
-
+public class boardGUI_small extends javax.swing.JFrame {
     /**
-     * Creates new form board
+     * Creates new form boardGUI_small
      */
-    public board() {
-        initComponents();
+    static Game game = null;
+    static String difficulty_selection = null;
+    public Map<String, Integer> difficulty = new HashMap<String, Integer>(){{
+        put("EASY", 10);
+        put("MEDIUM", 6);
+        put("HARD", 2);
+    }};
+    public boardGUI_small(Player current_player, String difficulty) {
+        initComponents(current_player, difficulty_selection);
+        difficulty_selection = difficulty;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -23,8 +30,7 @@ public class board extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
-
+    private void initComponents(Player current_player, String difficulty_selection) {
         jl00 = new javax.swing.JLabel();
         jl01 = new javax.swing.JLabel();
         jl02 = new javax.swing.JLabel();
@@ -90,7 +96,7 @@ public class board extends javax.swing.JFrame {
         jl70 = new javax.swing.JLabel();
         jl71 = new javax.swing.JLabel();
         jl72 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+		jLabel1 = new javax.swing.JLabel();
         homeBtn = new javax.swing.JButton();
         leadBtn = new javax.swing.JButton();
         upBtn = new javax.swing.JButton();
@@ -100,7 +106,7 @@ public class board extends javax.swing.JFrame {
         infoLabel = new javax.swing.JLabel();
         scTextLabel = new javax.swing.JLabel();
         scoreLabel = new javax.swing.JLabel();
-
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jl00.setBackground(new java.awt.Color(255, 255, 255));
@@ -500,14 +506,14 @@ public class board extends javax.swing.JFrame {
         homeBtn.setText("Home");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBtnActionPerformed(evt);
+                homeBtnActionPerformed(evt, current_player);
             }
         });
 
         leadBtn.setText("Leaderboard");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt);
+                leadBtnActionPerformed(evt, current_player);
             }
         });
 
@@ -821,39 +827,252 @@ public class board extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
+    // updating gui via API
+    public void updateGUI(Square[][] all_squares){
+        System.out.println("updating gui");
+        Map<Square, javax.swing.JLabel> gui_squares_api = new HashMap<Square, javax.swing.JLabel>(){{
+            put(all_squares[0][0], jl00);
+            put(all_squares[0][1], jl01);
+            put(all_squares[0][2], jl02);
+            put(all_squares[0][3], jl03);
+            put(all_squares[0][4], jl04);
+            put(all_squares[0][5], jl05);
+            put(all_squares[0][6], jl06);
+            put(all_squares[0][7], jl07);
+            // put(all_squares[0][8], jl08);
+            // put(all_squares[0][9], jl09);
+            // put(all_squares[0][10], jl0A);
+            // put(all_squares[0][11], jl0B);
+            put(all_squares[1][0], jl10);
+            put(all_squares[1][1], jl11);
+            put(all_squares[1][2], jl12);
+            put(all_squares[1][3], jl13);
+            put(all_squares[1][4], jl14);
+            put(all_squares[1][5], jl15);
+            put(all_squares[1][6], jl16);
+            put(all_squares[1][7], jl17);
+            // put(all_squares[1][8], jl18);
+            // put(all_squares[1][9], jl19);
+            // put(all_squares[1][10], jl1A);
+            // put(all_squares[1][11], jl1B);
+            put(all_squares[2][0], jl20);
+            put(all_squares[2][1], jl21);
+            put(all_squares[2][2], jl22);
+            put(all_squares[2][3], jl23);
+            put(all_squares[2][4], jl24);
+            put(all_squares[2][5], jl25);
+            put(all_squares[2][6], jl26);
+            put(all_squares[2][7], jl27);
+            // put(all_squares[2][8], jl28);
+            // put(all_squares[2][9], jl29);
+            // put(all_squares[2][10], jl2A);
+            // put(all_squares[2][11], jl2B);
+            put(all_squares[3][0], jl30);
+            put(all_squares[3][1], jl31);
+            put(all_squares[3][2], jl32);
+            put(all_squares[3][3], jl33);
+            put(all_squares[3][4], jl34);
+            put(all_squares[3][5], jl35);
+            put(all_squares[3][6], jl36);
+            put(all_squares[3][7], jl37);
+            // put(all_squares[3][8], jl38);
+            // put(all_squares[3][9], jl39);
+            // put(all_squares[3][10], jl3A);
+            // put(all_squares[3][11], jl3B);
+            put(all_squares[4][0], jl40);
+            put(all_squares[4][1], jl41);
+            put(all_squares[4][2], jl42);
+            put(all_squares[4][3], jl43);
+            put(all_squares[4][4], jl44);
+            put(all_squares[4][5], jl45);
+            put(all_squares[4][6], jl46);
+            put(all_squares[4][7], jl47);
+            // put(all_squares[4][8], jl48);
+            // put(all_squares[4][9], jl49);
+            // put(all_squares[4][10], jl4A);
+            // put(all_squares[4][11], jl4B);
+            put(all_squares[5][0], jl50);
+            put(all_squares[5][1], jl51);
+            put(all_squares[5][2], jl52);
+            put(all_squares[5][3], jl53);
+            put(all_squares[5][4], jl54);
+            put(all_squares[5][5], jl55);
+            put(all_squares[5][6], jl56);
+            put(all_squares[5][7], jl57);
+            // put(all_squares[5][8], jl58);
+            // put(all_squares[5][9], jl59);
+            // put(all_squares[5][10], jl5A);
+            // put(all_squares[5][11], jl5B);
+            put(all_squares[6][0], jl60);
+            put(all_squares[6][1], jl61);
+            put(all_squares[6][2], jl62);
+            put(all_squares[6][3], jl63);
+            put(all_squares[6][4], jl64);
+            put(all_squares[6][5], jl65);
+            put(all_squares[6][6], jl66);
+            put(all_squares[6][7], jl67);
+            // put(all_squares[6][8], jl68);
+            // put(all_squares[6][9], jl69);
+            // put(all_squares[6][10], jl6A);
+            // put(all_squares[6][11], jl6B);
+            put(all_squares[7][0], jl70);
+            put(all_squares[7][1], jl71);
+            put(all_squares[7][2], jl72);
+            put(all_squares[7][3], jl73);
+            put(all_squares[7][4], jl74);
+            put(all_squares[7][5], jl75);
+            put(all_squares[7][6], jl76);
+            put(all_squares[7][7], jl77);
+            // put(all_squares[7][8], jl78);
+            // put(all_squares[7][9], jl79);
+            // put(all_squares[7][10], jl7A);
+            // put(all_squares[7][11], jl7B);
+            // put(all_squares[8][0], jl80);
+            // put(all_squares[8][1], jl81);
+            // put(all_squares[8][2], jl82);
+            // put(all_squares[8][3], jl83);
+            // put(all_squares[8][4], jl84);
+            // put(all_squares[8][5], jl85);
+            // put(all_squares[8][6], jl86);
+            // put(all_squares[8][7], jl87);
+            // put(all_squares[8][8], jl88);
+            // put(all_squares[8][9], jl89);
+            // put(all_squares[8][10], jl8A);
+            // put(all_squares[8][11], jl8B);
+            // put(all_squares[9][0], jl90);
+            // put(all_squares[9][1], jl91);
+            // put(all_squares[9][2], jl92);
+            // put(all_squares[9][3], jl93);
+            // put(all_squares[9][4], jl94);
+            // put(all_squares[9][5], jl95);
+            // put(all_squares[9][6], jl96);
+            // put(all_squares[9][7], jl97);
+            // put(all_squares[9][8], jl98);
+            // put(all_squares[9][9], jl99);
+            // put(all_squares[9][10], jl9A);
+            // put(all_squares[9][11], jl9B);
+            // put(all_squares[10][0], jlA0);
+            // put(all_squares[10][1], jlA1);
+            // put(all_squares[10][2], jlA2);
+            // put(all_squares[10][3], jlA3);
+            // put(all_squares[10][4], jlA4);
+            // put(all_squares[10][5], jlA5);
+            // put(all_squares[10][6], jlA6);
+            // put(all_squares[10][7], jlA7);
+            // put(all_squares[10][8], jlA8);
+            // put(all_squares[10][9], jlA9);
+            // put(all_squares[10][10], jlAA);
+            // put(all_squares[10][11], jlAB);
+            // put(all_squares[11][0], jlB0);
+            // put(all_squares[11][1], jlB1);
+            // put(all_squares[11][2], jlB2);
+            // put(all_squares[11][3], jlB3);
+            // put(all_squares[11][4], jlB4);
+            // put(all_squares[11][5], jlB5);
+            // put(all_squares[11][6], jlB6);
+            // put(all_squares[11][7], jlB7);
+            // put(all_squares[11][8], jlB8);
+            // put(all_squares[11][9], jlB9);
+            // put(all_squares[11][10], jlBA);
+            // put(all_squares[11][11], jlBB);
+        }};
+        for(Square[] square_row : all_squares){
+            for(Square square : square_row){
+                if(square.getSquareType() == SquareType.EMPTY){
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(255, 255, 255));
+                }
+                if(square.getSquareType() == SquareType.FOOD){
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(100, 1, 1));
+                }
+                else if(square.getSquareType() == SquareType.SNAKE_NODE){
+                    System.out.println("node");
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(255, 51, 51));
+                }
+                else if(square.getSquareType() == SquareType.SNAKE_HEAD){
+                    System.out.println("head");
+                    gui_squares_api.get(square).setBackground(new java.awt.Color(200, 1, 1));
+                }
+            }
+        }
+    }
+    // handle start button
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // inner class for timer
+        class TimedGame{
+            Timer timer;
+            class updateGame extends TimerTask{
+                @Override
+                public void run(){
+                    if(!game.isGameOver()){
+                        infoLabel.setText("");
+                        scoreLabel.setText("");
+                        game.update();
+                        updateGUI(game.getBoard().getSquares());
+                    }
+                    else{
+                        System.out.println("ENDED");
+                        timer.cancel(); //Terminate the timer thread
+                        System.out.println("Time's up!");
+                        infoLabel.setText("GAME OVER");
+                        int length = game.getSnake().getSnakePartList().size();
+                        scoreLabel.setText(String.valueOf(length*10/difficulty.get(difficulty_selection)));
+                    }
+                }
+            }
+            public TimedGame(int seconds){
+                timer = new Timer();
+                timer.schedule(new updateGame(), 0, seconds * 100);
+            }
+        }
+        // timer manager
+        if(difficulty_selection != null){
+            game = Game.start();
+            new TimedGame(difficulty.get(difficulty_selection));
+            System.out.format("Task scheduled.%n");
+        }
+        else{
+            System.out.println("Select a Difficulty !");
+        }
     }                                        
-
-    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
         // TODO add your handling code here:
+        if(!game.isGameOver()){
+            infoLabel.setText("Game hasn't ended");
+        }
+        else{
+            homeGUI.createUI(current_player);
+            this.setVisible(false);
+        }
     }                                       
-
-    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-    }                                       
-
-    private void upBtnActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        // TODO add your handling code here:
-    }                                     
-
-    private void rightBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void downBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-    }                                       
-
     private void leftBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_LEFT);
     }                                       
-
+    private void upBtnActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_UP);
+    }                                     
+    private void rightBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_RIGHT);
+    }                                        
+    private void downBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+        game.setDirection(Game.DIRECTION_DOWN);
+    }                                       
+    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
+        // TODO add your handling code here:
+        if(!game.isGameOver()){
+            infoLabel.setText("Game hasn't ended");
+        }
+        else{
+            leadGUI.createUI(current_player);
+        }
+    }                                       
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void createUI(Player current_player, String difficulty_selection){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -867,28 +1086,29 @@ public class board extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(board.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(boardGUI_small.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(board.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(boardGUI_small.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(board.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(boardGUI_small.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(board.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(boardGUI_small.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new board().setVisible(true);
+                new boardGUI_small(current_player, difficulty_selection).setVisible(true);
             }
         });
     }
-
+    // public static void main(String[] args){
+        // trial run
+        // boardGUI_small.createUI(null);
+    // }
     // Variables declaration - do not modify                     
     private javax.swing.JButton downBtn;
     private javax.swing.JButton homeBtn;
-    private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jl00;
     private javax.swing.JLabel jl01;
@@ -898,6 +1118,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl05;
     private javax.swing.JLabel jl06;
     private javax.swing.JLabel jl07;
+    private javax.swing.JLabel jl08;
+    private javax.swing.JLabel jl09;
+    private javax.swing.JLabel jl0A;
+    private javax.swing.JLabel jl0B;
     private javax.swing.JLabel jl10;
     private javax.swing.JLabel jl11;
     private javax.swing.JLabel jl12;
@@ -906,6 +1130,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl15;
     private javax.swing.JLabel jl16;
     private javax.swing.JLabel jl17;
+    private javax.swing.JLabel jl18;
+    private javax.swing.JLabel jl19;
+    private javax.swing.JLabel jl1A;
+    private javax.swing.JLabel jl1B;
     private javax.swing.JLabel jl20;
     private javax.swing.JLabel jl21;
     private javax.swing.JLabel jl22;
@@ -914,6 +1142,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl25;
     private javax.swing.JLabel jl26;
     private javax.swing.JLabel jl27;
+    private javax.swing.JLabel jl28;
+    private javax.swing.JLabel jl29;
+    private javax.swing.JLabel jl2A;
+    private javax.swing.JLabel jl2B;
     private javax.swing.JLabel jl30;
     private javax.swing.JLabel jl31;
     private javax.swing.JLabel jl32;
@@ -922,6 +1154,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl35;
     private javax.swing.JLabel jl36;
     private javax.swing.JLabel jl37;
+    private javax.swing.JLabel jl38;
+    private javax.swing.JLabel jl39;
+    private javax.swing.JLabel jl3A;
+    private javax.swing.JLabel jl3B;
     private javax.swing.JLabel jl40;
     private javax.swing.JLabel jl41;
     private javax.swing.JLabel jl42;
@@ -930,6 +1166,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl45;
     private javax.swing.JLabel jl46;
     private javax.swing.JLabel jl47;
+    private javax.swing.JLabel jl48;
+    private javax.swing.JLabel jl49;
+    private javax.swing.JLabel jl4A;
+    private javax.swing.JLabel jl4B;
     private javax.swing.JLabel jl50;
     private javax.swing.JLabel jl51;
     private javax.swing.JLabel jl52;
@@ -938,6 +1178,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl55;
     private javax.swing.JLabel jl56;
     private javax.swing.JLabel jl57;
+    private javax.swing.JLabel jl58;
+    private javax.swing.JLabel jl59;
+    private javax.swing.JLabel jl5A;
+    private javax.swing.JLabel jl5B;
     private javax.swing.JLabel jl60;
     private javax.swing.JLabel jl61;
     private javax.swing.JLabel jl62;
@@ -946,6 +1190,10 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl65;
     private javax.swing.JLabel jl66;
     private javax.swing.JLabel jl67;
+    private javax.swing.JLabel jl68;
+    private javax.swing.JLabel jl69;
+    private javax.swing.JLabel jl6A;
+    private javax.swing.JLabel jl6B;
     private javax.swing.JLabel jl70;
     private javax.swing.JLabel jl71;
     private javax.swing.JLabel jl72;
@@ -954,12 +1202,65 @@ public class board extends javax.swing.JFrame {
     private javax.swing.JLabel jl75;
     private javax.swing.JLabel jl76;
     private javax.swing.JLabel jl77;
+    private javax.swing.JLabel jl78;
+    private javax.swing.JLabel jl79;
+    private javax.swing.JLabel jl7A;
+    private javax.swing.JLabel jl7B;
+    private javax.swing.JLabel jl80;
+    private javax.swing.JLabel jl81;
+    private javax.swing.JLabel jl82;
+    private javax.swing.JLabel jl83;
+    private javax.swing.JLabel jl84;
+    private javax.swing.JLabel jl85;
+    private javax.swing.JLabel jl86;
+    private javax.swing.JLabel jl87;
+    private javax.swing.JLabel jl88;
+    private javax.swing.JLabel jl89;
+    private javax.swing.JLabel jl8A;
+    private javax.swing.JLabel jl8B;
+    private javax.swing.JLabel jl90;
+    private javax.swing.JLabel jl91;
+    private javax.swing.JLabel jl92;
+    private javax.swing.JLabel jl93;
+    private javax.swing.JLabel jl94;
+    private javax.swing.JLabel jl95;
+    private javax.swing.JLabel jl96;
+    private javax.swing.JLabel jl97;
+    private javax.swing.JLabel jl98;
+    private javax.swing.JLabel jl99;
+    private javax.swing.JLabel jl9A;
+    private javax.swing.JLabel jl9B;
+    private javax.swing.JLabel jlA0;
+    private javax.swing.JLabel jlA1;
+    private javax.swing.JLabel jlA2;
+    private javax.swing.JLabel jlA3;
+    private javax.swing.JLabel jlA4;
+    private javax.swing.JLabel jlA5;
+    private javax.swing.JLabel jlA6;
+    private javax.swing.JLabel jlA7;
+    private javax.swing.JLabel jlA8;
+    private javax.swing.JLabel jlA9;
+    private javax.swing.JLabel jlAA;
+    private javax.swing.JLabel jlAB;
+    private javax.swing.JLabel jlB0;
+    private javax.swing.JLabel jlB1;
+    private javax.swing.JLabel jlB2;
+    private javax.swing.JLabel jlB3;
+    private javax.swing.JLabel jlB4;
+    private javax.swing.JLabel jlB5;
+    private javax.swing.JLabel jlB6;
+    private javax.swing.JLabel jlB7;
+    private javax.swing.JLabel jlB8;
+    private javax.swing.JLabel jlB9;
+    private javax.swing.JLabel jlBA;
+    private javax.swing.JLabel jlBB;
     private javax.swing.JButton leadBtn;
     private javax.swing.JButton leftBtn;
     private javax.swing.JButton rightBtn;
-    private javax.swing.JLabel scTextLabel;
-    private javax.swing.JLabel scoreLabel;
     private javax.swing.JButton startBtn;
     private javax.swing.JButton upBtn;
+    private javax.swing.JLabel scTextLabel;
+    private javax.swing.JLabel scoreLabel;
+    private javax.swing.JLabel infoLabel;
     // End of variables declaration                   
 }
