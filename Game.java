@@ -117,11 +117,23 @@ public class Game {
 	}
 
 	// public static void main(String[] args){
-    public static Game start(){
+    public static Game start(String board_selection){
 
 		System.out.println("Going to start game");
 
-		Board board = new Board(BoardSize.BIG);
+        Board board = null;
+        if(board_selection.equals("SMALL")){
+            board = new Board(BoardSize.SMALL);
+        }
+        else if(board_selection.equals("MEDIUM")){
+            board = new Board(BoardSize.MEDIUM);
+        }
+        else if(board_selection.equals("BIG")){
+            board = new Board(BoardSize.BIG);
+        }
+        else{
+            return null;
+        }
 		Square initPos = board.getSquares()[0][0];
 		Snake initSnake = new Snake(initPos);
 		Game newGame = new Game(initSnake, board);
@@ -156,28 +168,28 @@ public class Game {
 		// }
 	}
 
-    public static void main(String[] args){
-        Game game = Game.start();
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if(!game.gameOver){
-                    game.update();
-                    for(Square[] row : game.getBoard().getSquares()){
-                        for(Square square : row){
-                            System.out.print(String.valueOf(square.getSquareType()).substring(0, 1) + " ");
-                        }
-                        System.out.println("");
-                    }
-                }
-                else{
-                    System.out.println("ENDED");
-                }
-                // updateGUI();
-                // Enter your code which you want to execute every 2 second
-            }
-        }, 0, 1000);//put here time 1000 milliseconds = 1 second
-    }
+    // public static void main(String[] args){
+    //     Game game = Game.start();
+    //     new Timer().scheduleAtFixedRate(new TimerTask() {
+    //         @Override
+    //         public void run() {
+    //             if(!game.gameOver){
+    //                 game.update();
+    //                 for(Square[] row : game.getBoard().getSquares()){
+    //                     for(Square square : row){
+    //                         System.out.print(String.valueOf(square.getSquareType()).substring(0, 1) + " ");
+    //                     }
+    //                     System.out.println("");
+    //                 }
+    //             }
+    //             else{
+    //                 System.out.println("ENDED");
+    //             }
+    //             // updateGUI();
+    //             // Enter your code which you want to execute every 2 second
+    //         }
+    //     }, 0, 1000);//put here time 1000 milliseconds = 1 second
+    // }
 }
 
 

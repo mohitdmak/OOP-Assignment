@@ -5,12 +5,12 @@ public class Board {
  
     public Board(BoardSize board_size){
         if(board_size == BoardSize.SMALL){
-            ROW_COUNT = 6;
-            COL_COUNT = 6;
+            ROW_COUNT = 8;
+            COL_COUNT = 8;
         }
         else if(board_size == BoardSize.MEDIUM){
-            ROW_COUNT = 9;
-            COL_COUNT = 9;
+            ROW_COUNT = 10;
+            COL_COUNT = 10;
         }
         else if(board_size == BoardSize.BIG){
             ROW_COUNT = 12;

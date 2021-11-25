@@ -240,7 +240,7 @@ public class homeGUI extends javax.swing.JFrame {
             String difficulty_selection = buttonGroup1.getSelection().getActionCommand();
             String board_selection = buttonGroup2.getSelection().getActionCommand();
             if(difficulty_selection != null && board_selection != null){
-                boardGUI.createUI(current_player, difficulty_selection);
+                boardGUI.createUI(current_player, difficulty_selection, board_selection);
                 this.setVisible(false);
             }
         }
