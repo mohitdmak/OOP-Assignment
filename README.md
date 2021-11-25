@@ -10,3 +10,5 @@
 * The Left Right Up Down buttons are to control the snake
 * You may check leaderboard after completing a game or from the Home page
 * Should you wish to logout, press Logout
+
+Link to explanatory video: [Video](https://drive.google.com/file/d/1NbJlScEJIN2VEpsowfjPSNuUx3oUtWJy/view?usp=sharing)

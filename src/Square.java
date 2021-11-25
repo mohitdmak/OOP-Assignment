@@ -1,3 +1,5 @@
+package src;
+
 // square class associated with each coordinate on the board
 public class Square{
 
