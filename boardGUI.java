@@ -24,19 +24,19 @@ public class boardGUI extends javax.swing.JFrame {
         put("MEDIUM", 6);
         put("HARD", 2);
     }};
-    public boardGUI(Player current_player, String difficulty, String boardsize) {
+    public boardGUI(int id, String difficulty, String boardsize) {
         // initComponents(current_player, difficulty_selection);
         difficulty_selection = difficulty;
         board_selection = boardsize;
         // get_initComponents_method.get(board_selection).invoke(current_player, difficulty_selection);
         if(board_selection.equals("SMALL")){
-            initComponents_SMALL(current_player, difficulty_selection);
+            initComponents_SMALL(id, difficulty_selection);
         }
         else if(board_selection.equals("MEDIUM")){
-            initComponents_MEDIUM(current_player, difficulty_selection);
+            initComponents_MEDIUM(id, difficulty_selection);
         }
         else if(board_selection.equals("BIG")){
-            initComponents_BIG(current_player, difficulty_selection);
+            initComponents_BIG(id, difficulty_selection);
         }
         else{
             System.out.println("NOT INITIATED");
@@ -51,7 +51,7 @@ public class boardGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents_BIG(Player current_player, String difficulty_selection) {
+    private void initComponents_BIG(int id, String difficulty_selection) {
 
         jl00 = new javax.swing.JLabel();
         jl01 = new javax.swing.JLabel();
@@ -364,7 +364,7 @@ public class boardGUI extends javax.swing.JFrame {
         startBtn.setText("Start");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startBtnActionPerformed(evt);
+                startBtnActionPerformed(evt, id);
             }
         });
 
@@ -1088,14 +1088,14 @@ public class boardGUI extends javax.swing.JFrame {
         homeBtn.setText("Home");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBtnActionPerformed(evt, current_player);
+                homeBtnActionPerformed(evt, id);
             }
         });
 
         leadBtn.setText("Leaderboard");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt, current_player);
+                leadBtnActionPerformed(evt, id);
             }
         });
 
@@ -1693,7 +1693,7 @@ public class boardGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void initComponents_MEDIUM(Player current_player, String difficulty_selection) {
+    private void initComponents_MEDIUM(int id, String difficulty_selection) {
 
         jl00 = new javax.swing.JLabel();
         jl01 = new javax.swing.JLabel();
@@ -2005,7 +2005,7 @@ public class boardGUI extends javax.swing.JFrame {
         startBtn.setText("Start");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startBtnActionPerformed(evt);
+                startBtnActionPerformed(evt, id);
             }
         });
 
@@ -2729,14 +2729,14 @@ public class boardGUI extends javax.swing.JFrame {
         homeBtn.setText("Home");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBtnActionPerformed(evt, current_player);
+                homeBtnActionPerformed(evt, id);
             }
         });
 
         leadBtn.setText("Leaderboard");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt, current_player);
+                leadBtnActionPerformed(evt, id);
             }
         });
 
@@ -3334,7 +3334,7 @@ public class boardGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void initComponents_SMALL(Player current_player, String difficulty_selection) {
+    private void initComponents_SMALL(int id, String difficulty_selection) {
         jl00 = new javax.swing.JLabel();
         jl01 = new javax.swing.JLabel();
         jl02 = new javax.swing.JLabel();
@@ -3566,7 +3566,7 @@ public class boardGUI extends javax.swing.JFrame {
         startBtn.setText("Start");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startBtnActionPerformed(evt);
+                startBtnActionPerformed(evt, id);
             }
         });
 
@@ -3810,14 +3810,14 @@ public class boardGUI extends javax.swing.JFrame {
         homeBtn.setText("Home");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBtnActionPerformed(evt, current_player);
+                homeBtnActionPerformed(evt, id);
             }
         });
 
         leadBtn.setText("Leaderboard");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt, current_player);
+                leadBtnActionPerformed(evt, id);
             }
         });
 
@@ -4639,7 +4639,7 @@ public class boardGUI extends javax.swing.JFrame {
     }
 
     // handle start button
-    private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void startBtnActionPerformed(java.awt.event.ActionEvent evt, int id) {                                         
         // inner class for timer
         class TimedGame{
             Timer timer;
@@ -4666,7 +4666,9 @@ public class boardGUI extends javax.swing.JFrame {
                         System.out.println("Time's up!");
                         infoLabel.setText("GAME OVER");
                         int length = game.getSnake().getSnakePartList().size();
-                        scoreLabel.setText(String.valueOf(length*10/difficulty.get(difficulty_selection)));
+                        int score = length * 10/ difficulty.get(difficulty_selection);
+                        Player.get_current_player_details(id).update_high_score(score, game.getBoard().board_size);
+                        scoreLabel.setText(String.valueOf(score));
                     }
                 }
             }
@@ -4686,13 +4688,13 @@ public class boardGUI extends javax.swing.JFrame {
         }
     }                                        
 
-    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt, int id) {                                        
         // TODO add your handling code here:
         if(!game.isGameOver()){
             infoLabel.setText("Game hasn't ended");
         }
         else{
-            homeGUI.createUI(current_player);
+            homeGUI.createUI(id);
             this.setVisible(false);
         }
     }                                       
@@ -4717,20 +4719,20 @@ public class boardGUI extends javax.swing.JFrame {
         game.setDirection(Game.DIRECTION_DOWN);
     }                                       
 
-    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
+    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, int id) {                                        
         // TODO add your handling code here:
         if(!game.isGameOver()){
             infoLabel.setText("Game hasn't ended");
         }
         else{
-            leadGUI.createUI(current_player);
+            leadGUI.createUI(id);
         }
     }                                       
 
     /**
      * @param args the command line arguments
      */
-    public static void createUI(Player current_player, String difficulty_selection, String board_selection){
+    public static void createUI(int id, String difficulty_selection, String board_selection){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -4757,7 +4759,7 @@ public class boardGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new boardGUI(current_player, difficulty_selection, board_selection).setVisible(true);
+                new boardGUI(id, difficulty_selection, board_selection).setVisible(true);
             }
         });
     }

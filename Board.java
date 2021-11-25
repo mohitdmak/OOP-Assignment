@@ -2,8 +2,10 @@ public class Board {
  
     final int ROW_COUNT, COL_COUNT;
     private Square[][] squares;
+    final BoardSize board_size;
  
     public Board(BoardSize board_size){
+        this.board_size = board_size;
         if(board_size == BoardSize.SMALL){
             ROW_COUNT = 8;
             COL_COUNT = 8;

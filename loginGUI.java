@@ -72,9 +72,8 @@ public class loginGUI{
             try{
                 int status = Player.login(Username, Password1);
                 if(status > 0){
-                    Player current_player = Player.get_current_player_details(status);
-                    JOptionPane.showMessageDialog(null, "You are logged in with id :" + current_player.id);
-                    homeGUI.createUI(current_player);
+                    JOptionPane.showMessageDialog(null, "You are logged in with id :" + status);
+                    homeGUI.createUI(status);
                     frame.setVisible(false);
                 }
                 else{

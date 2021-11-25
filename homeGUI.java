@@ -34,8 +34,8 @@ public class homeGUI extends javax.swing.JFrame {
     private javax.swing.JButton startBtn;
 
     // End of variables declaration                   
-    public homeGUI(Player current_player){
-        initComponents(current_player);
+    public homeGUI(int id){
+        initComponents(id);
     }
 
     /**
@@ -45,7 +45,7 @@ public class homeGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents(Player current_player) {
+    private void initComponents(int id) {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -113,14 +113,14 @@ public class homeGUI extends javax.swing.JFrame {
         startBtn.setText("Start");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startBtnActionPerformed(evt, current_player);
+                startBtnActionPerformed(evt, id);
             }
         });
 
         leadBtn.setText("Leaderboard");
         leadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leadBtnActionPerformed(evt, current_player);
+                leadBtnActionPerformed(evt, id);
             }
         });
 
@@ -135,9 +135,9 @@ public class homeGUI extends javax.swing.JFrame {
 
         jLabel5.setText("ID:");
         
-        jLabel6.setText(current_player.username);
+        jLabel6.setText(Player.get_current_player_details(id).username);
 
-        jLabel7.setText(String.valueOf(current_player.id));
+        jLabel7.setText(String.valueOf(id));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,13 +234,13 @@ public class homeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                             
 
-    private void startBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player){ 
+    private void startBtnActionPerformed(java.awt.event.ActionEvent evt, int id){ 
         // handling code
         try{
             String difficulty_selection = buttonGroup1.getSelection().getActionCommand();
             String board_selection = buttonGroup2.getSelection().getActionCommand();
             if(difficulty_selection != null && board_selection != null){
-                boardGUI.createUI(current_player, difficulty_selection, board_selection);
+                boardGUI.createUI(id, difficulty_selection, board_selection);
                 this.setVisible(false);
             }
         }
@@ -255,9 +255,9 @@ public class homeGUI extends javax.swing.JFrame {
         this.setVisible(false);
     }                                         
 
-    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, Player current_player) {                                        
+    private void leadBtnActionPerformed(java.awt.event.ActionEvent evt, int id) {                                        
         // TODO add your handling code here:
-        leadGUI.createUI(current_player);
+        leadGUI.createUI(id);
     }                                       
 
     /**
@@ -269,7 +269,7 @@ public class homeGUI extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 
-    public static void createUI(Player current_player){
+    public static void createUI(int id){
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -291,7 +291,7 @@ public class homeGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new homeGUI(current_player).setVisible(true);
+                new homeGUI(id).setVisible(true);
             }
         });
     }

@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # compile and move binaries to bin/
-javac Game.java && \
+javac signupGUI.java && \
     mv *.class ./bin/
 
 # run class and return
 cd ./bin && \
-    java Game && \
+    java signupGUI && \
+    rm *.class && \
     cd -
 

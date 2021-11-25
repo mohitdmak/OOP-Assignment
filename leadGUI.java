@@ -41,14 +41,14 @@ public class leadGUI extends javax.swing.JFrame {
     
     // global vars needed to represent the leaderboard
     public String previous_selection = null;
-    Map<BoardSize, Set<Player>> leaderboard = null;
+    // Map<BoardSize, Set<Player>> leaderboard = null;
     String heading = "Username   |   UserID   |   Rank   |   HighScore\n============================\n";
 
     /**
      * Creates new form leadGUI
      */
-    public leadGUI(Player current_player) {
-        initComponents(current_player);
+    public leadGUI(int id) {
+        initComponents(id);
     }
 
     /**
@@ -58,7 +58,7 @@ public class leadGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents(Player current_player) {
+    private void initComponents(int id) {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -118,7 +118,7 @@ public class leadGUI extends javax.swing.JFrame {
         genBtn.setText("Generate Leaderboard");
         genBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genBtnActionPerformed(evt, buttonGroup2, current_player);
+                genBtnActionPerformed(evt, buttonGroup2, id);
             }
         });
 
@@ -184,17 +184,17 @@ public class leadGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void genBtnActionPerformed(java.awt.event.ActionEvent evt, javax.swing.ButtonGroup buttonGroup2, Player current_player){
+    private void genBtnActionPerformed(java.awt.event.ActionEvent evt, javax.swing.ButtonGroup buttonGroup2, int id){
         // TODO add your handling code here:
         try{
             // get selected button
             String selection = buttonGroup2.getSelection().getActionCommand();
 
             // execute if either button is selected first time or is different from previously selected button, or the leaderboard is updated
-            if(previous_selection == null || previous_selection != selection || leaderboard != Leaderboard.get_leaderboard()){
+            if(previous_selection == null || previous_selection != selection){
 
                 // update leaderboard and previous selections
-                leaderboard = Leaderboard.get_leaderboard();
+                // leaderboard = Leaderboard.get_leaderboard();
                 previous_selection = selection;
 
                 // map buttons to boardSize
@@ -205,9 +205,9 @@ public class leadGUI extends javax.swing.JFrame {
                 );
 
                 // update current player rank and set text
-                current_player = Player.get_current_player_details(current_player.id);
-                jLabel5.setText(String.valueOf(current_player.rank.get(get_board_size.get(selection))));
+                // current_player = Player.get_current_player_details(current_player.id);
                 BoardSize selected_size = get_board_size.get(selection);
+                jLabel5.setText(String.valueOf(Player.get_current_player_details(id).get_player_ranks().get(selected_size)));
 
                 // clear previous ranklist if present
                 try{
@@ -222,7 +222,8 @@ public class leadGUI extends javax.swing.JFrame {
                 }
 
                 // present ranklist
-                for(Player player : leaderboard.get(selected_size)){
+                System.out.println(String.valueOf(Player.get_players().size()));
+                for(Player player : Leaderboard.get_leaderboard().get(selected_size)){
                     String username;
                     // present indented data
                     // String entry = "%-25s%-15s%-15s%s%n";
@@ -249,6 +250,7 @@ public class leadGUI extends javax.swing.JFrame {
         }
         // in case no button is selected
         catch(NullPointerException exp){
+            exp.printStackTrace();
             System.out.println("You must first select a board size !");
         }
     }                                      
@@ -267,7 +269,7 @@ public class leadGUI extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    public static void createUI(Player current_player){
+    public static void createUI(int id){
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -289,7 +291,7 @@ public class leadGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new leadGUI(current_player).setVisible(true);
+                new leadGUI(id).setVisible(true);
             }
         });
     }
