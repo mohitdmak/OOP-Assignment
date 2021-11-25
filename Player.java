@@ -55,7 +55,6 @@ class Player implements Comparable<Player>{
         current_id++;
         // adding to list of players
         all_players.add(new_player);
-        new_player.get_player_ranks();
         return new_player;
     }
 

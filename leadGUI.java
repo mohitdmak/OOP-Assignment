@@ -227,6 +227,7 @@ public class leadGUI extends javax.swing.JFrame {
                     String username;
                     // present indented data
                     // String entry = "%-25s%-15s%-15s%s%n";
+                    player.get_player_ranks();
                     String rank = String.valueOf(player.rank.get(selected_size));
                     String high_score = String.valueOf(player.high_score.get(selected_size));
                     // limit char size
