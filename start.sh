@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# compile and move binaries to bin/
+# compile inside src dir
+cd ./src
+
+# move all binaries into bin
 javac signupGUI.java && \
-    mv *.class ./bin/
+    mv *.class ../bin/
 
 # run class and return
-cd ./bin && \
+cd ../bin && \
     java signupGUI && \
     rm *.class && \
-    cd -
+    cd ..
 

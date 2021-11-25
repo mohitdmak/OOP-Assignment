@@ -1,6 +1,7 @@
 import static java.util.Map.entry;
 import java.util.*;
 
+// player class organizing a player's record and details
 class Player implements Comparable<Player>{
 
     ///////////////// ATTRIBUTES /////////////////
@@ -15,14 +16,6 @@ class Player implements Comparable<Player>{
     public final String username;
     private final String password;
     public final int id;
-
-    // rank and high scores
-    /* Random generation should be removed later !!!! */
-    // Random rand = new Random();
-    // int r1 = rand.nextInt(50);
-    // int r2 = rand.nextInt(50);
-    // int r3 = rand.nextInt(50);
-    /* Random generation should be removed later !!!! */
 
     // map storing highscores and ranks for different board sizes
     public Map<BoardSize, Integer> rank = new HashMap<BoardSize, Integer>();
@@ -109,7 +102,4 @@ class Player implements Comparable<Player>{
     public int compareTo(Player other_player){
         return this.id - other_player.id;
     }
-
-
-    ///////////////// TO BE DELETED /////////////////
 }

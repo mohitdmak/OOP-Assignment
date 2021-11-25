@@ -8,6 +8,7 @@ class Leaderboard{
 
     // ranklist structure
     private static Map<BoardSize, Set<Player>> all_ranklists;
+
     ///////////////// CONSTRUCTOR /////////////////
 
     // custom constructor need not be created here as we only use the static methods of the leaderboard class.
@@ -71,6 +72,7 @@ class Leaderboard{
             }));
         }};
 
+        // organize each player into treeset
         for(Player player : Player.get_players()){
             all_ranklists.get(BoardSize.SMALL).add(player);
             all_ranklists.get(BoardSize.MEDIUM).add(player);
