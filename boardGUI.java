@@ -355,7 +355,7 @@ public class boardGUI extends javax.swing.JFrame {
         jl41.setOpaque(true);
         jl41.setPreferredSize(new java.awt.Dimension(20, 20));
 
-        jl42.setBackground(new java.awt.Color(255, 51, 51));
+        jl42.setBackground(new java.awt.Color(255, 255, 255));
         jl42.setMaximumSize(new java.awt.Dimension(20, 20));
         jl42.setMinimumSize(new java.awt.Dimension(20, 20));
         jl42.setOpaque(true);
@@ -1996,7 +1996,7 @@ public class boardGUI extends javax.swing.JFrame {
         jl41.setOpaque(true);
         jl41.setPreferredSize(new java.awt.Dimension(20, 20));
 
-        jl42.setBackground(new java.awt.Color(255, 51, 51));
+        jl42.setBackground(new java.awt.Color(255, 255, 255));
         jl42.setMaximumSize(new java.awt.Dimension(20, 20));
         jl42.setMinimumSize(new java.awt.Dimension(20, 20));
         jl42.setOpaque(true);
@@ -3557,7 +3557,7 @@ public class boardGUI extends javax.swing.JFrame {
         jl41.setOpaque(true);
         jl41.setPreferredSize(new java.awt.Dimension(20, 20));
 
-        jl42.setBackground(new java.awt.Color(255, 51, 51));
+        jl42.setBackground(new java.awt.Color(255, 255, 255));
         jl42.setMaximumSize(new java.awt.Dimension(20, 20));
         jl42.setMinimumSize(new java.awt.Dimension(20, 20));
         jl42.setOpaque(true);
