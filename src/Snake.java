@@ -1,3 +1,5 @@
+package src;
+
 // To represent a snake
 import java.util.LinkedList;
  

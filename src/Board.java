@@ -1,3 +1,5 @@
+package src;
+
 import java.util.*;
 
 // Board class organizing all square
